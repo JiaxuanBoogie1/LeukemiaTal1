@@ -10,7 +10,7 @@ Transcription factors are proteins that have the ability to bind to special loca
 
 ChipPComp is the section to identify unique peak regions of specific cellular condition after peak calling. To define regions, alternative feature spaces (AFS) are found as the combination of the peaks into a single unified set, after that density matrix (UDM) is applied to read count pile ups. UDM is the method to normalize the width of peaks and provide a read count density. Finally, principal component analysis (PCA) is applied to the UDM. PCA is used to normalize the density matrix and then preform quantile normalization and return the eigenvectors in a list with the normalized data. By plotting PC graphs, unique peak region of specific cellular environment can be defined, and the peak regions data were added to the peak database to produce the bed file and fasta file for each cellular environment. 
 
-mT1 part is run after the bed files and fasta files about defined peak regions for each cellular environment are produced from ChipPComp. EBox CANNTG and Gata GATAA are two common motif binding sites for Tal1 transcription factor. There are two common motifs binding mechanisms for Tal1. One way is Tal 1 will dimerize with E-protein and directly bind to EBox DNA with bHLH DNA binding domain. Alternatively, Tal1 may interact indirectly through recruitment by other TFs as part of a complex such as GATA. It is important to find the distance between two motifs at different cellular environment to see how distances effect motif functions. In general, distance between two motifs is 12bp to 15bp, but the accurate distance depends on cells. In addition, Jaspar database contains a list of other preference composite motifs for Tal1. The preferred distances for Ebox, GATA and all motifs inside Jaspar are compared as well to find differences among cellular environments. 
+mT1 part is run after the bed files and fasta files about defined peak regions for each cellular environment are produced from ChipPComp. EBox CANNTG and Gata GATAA are two common motif binding sites for Tal1 transcription factor. There are two common motifs binding mechanisms for Tal1. One way is Tal 1 will dimerize with E-protein and directly bind to EBox DNA with bHLH DNA binding domain. Alternatively, Tal1 may interact indirectly through recruitment by other TFs as part of a complex such as GATA. It is important to find the distance between two motifs at different cellular environments to see how distances effect motif functions. In general, the distances between two motifs is 12bp to 15bp, but the accurate distance depends on cells. In addition, Jaspar database contains a list of other preference composite motifs for Tal1. The preferred distances for Ebox, GATA and a list of motifs (based on personal research interests) are compared as well to find differences among cellular environments. 
 
 ## Installation:
 Prerequisites:
@@ -62,7 +62,7 @@ Example for regular ccca:
 Example for adding regions:
 >addRegion (-d, -n, -l) 
 
-Example for finding distance between two motifs:
+Example for finding the distance between two motifs:
 >motifDistance (-f .fasta, “-m1”, “-m2”)
 
 Example for finding preferred distances among motifs under peaks:
@@ -77,9 +77,9 @@ normalizePRC:	Normalize the principal components
 
 addRegion:	Add the defined peak region for each cellular environment by observing principal component graphs
 
-motifDistance:	Find the distances between two motifs within set of genomic range
+motifDistance:	Find the distances between the composite motifs within the set of genomic range
 
-combHeights:	Determine number of occurrences for each member along a specific sequence 
+combHeights:	Determine the number of occurrences for each member along a specific sequence 
 
 mT1:	Investigation of novel preferred distance between a list of motifs. The input motifs are based on personal research interests (at least three motifs). It also includes probability density function results for each motif. 
 
@@ -92,7 +92,7 @@ Option:
 This is the REQUIRED parameter for makeCCCA. rawData is a list of raw read data files inside c(…) and files must be in the name.bed format. 
 
 -p – peaklist
-This is the REQUIRED parameter for makeCCCA. File must be in the .xlsx format which contains a list of all raw peak files c(…) for analysis (from MACS). All .bed files inside rawData list must have a corresponding .xlsx peak file. The list of .xlsx peak must have the same order as the list of .bed raw data. 
+This is the REQUIRED parameter for makeCCCA. Files must be in the .xlsx format which contains a list of all raw peak files c(…) for analysis (from MACS). All .bed files inside rawData list must have a corresponding .xlsx peak file. The list of .xlsx peak must have the same order as the list of .bed raw data. 
 
 -c – category
 The is the REQUIRED parameter for makeCCCA. The list of names for all cell lines inside c(…). The order of names must be corresponding to the raw data .bed files and peak .xlsx files.  
@@ -106,7 +106,7 @@ To define and separate the specific peak regions for each cellular environment b
 
 Option:
 -d -- database 
-The is the REQUIRED parameter for addRegion. The database must be the name of result database from makeCCCA.  
+The is the REQUIRED parameter for addRegion. The database must be the name of the result database from makeCCCA.  
 
 -n -- tag name
 The is the REQUIRED parameter for addRegion. The tag / name of each cellular environment defined region inside the database. The tag will be added to database$reg 
@@ -146,7 +146,7 @@ Optional parameter for mT1. cl is a cluster from makeForkCluster. cl=NULL is the
 
 
 ## Output:
-1.	The output database contains information about all peaks. Information include:
+1.	The output database contains information about all peaks. Information includes:
   afs (alternative feature space)
   udm (unified density matrix)
   prc$normData (normalized data from principal component analysis)
@@ -155,20 +155,20 @@ Optional parameter for mT1. cl is a cluster from makeForkCluster. cl=NULL is the
   reg (newly defined regions for each cellular environment)
   categories (the list of cellular categories in order)
 
-2.	The output Tag.bed file is a bed file which contains information about peaks in defined peak regions for each cellular environment. You can open it in excel and sort/filter using excel functions. Information include:
+2.	The output Tag.bed file is a bed file which contains information about peaks in defined peak regions for each cellular environment. You can open it in excel and sort/filter using excel functions. Information includes:
 chromosome name
 start position of peak
 end position of peak
 
 3.	The output name.fasta file is a fasta file which contains information about actual homo sapiens nucleotide sequence of all peak inside defined peak regions for each cellular environment. To get the fasta file, use getSeq function inside GenomicRanges package. Remember to convert the Tag.bed file into GeneRangelist before running getSeq function. 
-Information include:
+Information includes:
 DNAStringSet: width of one group of nucleotide sequence and actual nucleotide sequences. 
  
 
 4.	CANNTG-GATAA composite motif preferred distance versus frequency plot. The linear plot with x-axis Ebox CANNTG – GATA GATAA motif distance and y-axis frequency is produced after running motifDistance. The plot helps to find the preferred distance (bp) between two motifs for different cellular environments. The input composite motifs can be changed based on personal research interest. 
 
 
-5.	Six motifs distance plots. The first plot is the Ebox CANNTG versus probability density function at specific genomic location and second one is the GATA GATAA versus probability density. The third plot is the convolution graphs for both motifs. The fourth plot is the frequency of occurrences for specific CANNTG-GATAA motif distance. The fifth one is the peak heights versus frequency plot and last one is test p-value plot for each motif distance. All these plots represent preferred distances and relationships among Ebox-GATA composite motifs. Differences among all plots with different cellular environments can be observed. 
+5.	Six motifs distance plots. The first plot is the Ebox CANNTG versus probability density function at the specific genomic location and the second one is the GATA GATAA versus probability density. The third plot is the convolution graphs for both motifs. The fourth plot is the frequency of occurrences for specific CANNTG-GATAA motif distance. The fifth one is the peak heights versus frequency plot and the last one is test p-value plot for each motif distance. All these plots represent preferred distances and relationships among Ebox-GATA composite motifs. Differences among all plots with different cellular environments can be observed. 
 
 
 
