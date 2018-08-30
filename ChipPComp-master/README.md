@@ -1,6 +1,7 @@
 # ChipPComp
 
 ## Example
+Refer to alexjgriffith github: https://github.com/alexjgriffith/ChipPComp
 These examples use the data sets that will be in ChipPCompData, change the root directory to wherever you have this package saved.
 
 Install devtools and ChipPComp from github. ChipPComp package is used to define specifc PCA peak regions for each celluar environment:
