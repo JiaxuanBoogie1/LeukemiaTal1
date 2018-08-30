@@ -6,7 +6,7 @@ Maintainer: Alexander Griffith <griffitaj@gmail.com>
 Description: Combines ChIP seq data between species, and applies
              principal component analysis to elucidate underlying
              similarities between data sets.
-Depends: R (>= 3.5.0)
+Depends: R (>= 3.4.0)
 License: What license is it under?
 VignetteBuilder: knitr
 Encoding: UTF-8
