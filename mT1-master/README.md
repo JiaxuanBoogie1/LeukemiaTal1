@@ -1,6 +1,6 @@
 # mT1
 ## Motifs in Tandem With One Another
-
+## Refer to alexgriffith github: https://github.com/alexjgriffith/mT1
 
 **mT1** identifies the distance between DNA motifs in subsets of the genome. First it builds the empirical PDF from individual motifs, then it generates the expectations for the distances between the two motifs. **mT1** was designed to be applied to ChIP-Seq peaks.
 ___
