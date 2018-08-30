@@ -10,7 +10,7 @@ Suggests:
 	BSgenome.Hsapiens.UCSC.hg19,
 	knitr,
 	rmarkdown
-Depends: R (>= 3.5)
+Depends: R (>= 3.4.0)
 License: GPL
 LazyData: true
 VignetteBuilder: knitr
