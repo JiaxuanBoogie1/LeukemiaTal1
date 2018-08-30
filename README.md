@@ -27,7 +27,7 @@ Source the devtools package in R every time before use functions inside devtools
 Install the ChipPComp package into R with the help of the function inside devtools:
 ```{r}
 >install_github(“JiaxuanBoogie1/Leukemia_Tal1”)
->library(ChipPComp)
+>library(Leukemia_Tal1)
 ```
 
 Install other required packages:
@@ -57,16 +57,16 @@ To use GenomicRanges, source it every time before use it:
 
 ## Usage of Leukemia_Tal1:
 Example for regular ccca:
->ChipPComp::makeCCCA (-r unique_nodups.bed, -p peaks.xls, -c, -mco)
+>makeCCCA (-r unique_nodups.bed, -p peaks.xls, -c, -mco)
 
 Example for adding regions:
->ChipPComp::addRegion (-d, -n, -l) 
+>addRegion (-d, -n, -l) 
 
 Example for finding distance between two motifs:
->mT1:: motifDistance (-f .fasta, “-m1”, “-m2”)
+>motifDistance (-f .fasta, “-m1”, “-m2”)
 
 Example for finding preferred distances among motifs under peaks:
->mT1::mT1( -f fasta file, -m)
+>mT1( -f fasta file, -m)
 
 ## Explanation for important functions:
 makeCCCA:	Find AFS for all peak files, and apply UDM and PCA to them. 
