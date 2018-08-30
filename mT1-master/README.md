@@ -1,7 +1,6 @@
 # mT1
 ## Motifs in Tandem With One Another
-### Alexander Griffith
-### Aug 24 2016
+
 
 **mT1** identifies the distance between DNA motifs in subsets of the genome. First it builds the empirical PDF from individual motifs, then it generates the expectations for the distances between the two motifs. **mT1** was designed to be applied to ChIP-Seq peaks.
 ___
@@ -51,77 +50,63 @@ ___
 ### Examples
 Compare the distances between two motifs in a set of genome subsets.
 
-```R
-## libraries
-library(mT1)
-## load the fasta file for analysis
-fasta<-mT1_fasta
+Find distances between two motifs CANNTG Ebox and GATAA GATA on each string they share at four different cellular environments. The distances are relative to the start of each motif:
+```{r}
+distanceLeukeima<- motifDistance(fastaLeukemia, "CANNTG", "GATAA")
+distanceErythroid <- motifDistance(fastaErythroid, "CANNTG", "GATAA")
+distanceHSC <- motifDistance(fastaHSC, "CANNTG", "GATAA")
+distancesECFC <- motifDistance(fastaECFC, "CANNTG", "GATAA")
+```
 
-## Find the distances between CANNTG and GATAA for on each string
-## they share. The distances are relative to the start of each
-## motif
-distances<-motifDistance(fasta,"CANNTG","GATAA")
+Plot the motif-motif distance CANNTG-GATAA frequency results between -20 and 20 bp:
+```{r}
+x <- seq(-20, 20)
 
-## Plot the results between -20 and 20 bp
-x<-seq(-20,20)
-y<-combHeights(x,distances[,2])[[1]]
-plot(x,y,main="CANNTG-GATAA",xlab="distance(bp)",
-	 ylab="Frequency",type="l")
+yLeukemia <- combHeights(x, distanceLeukeima[,2])[[1]]
+yErythroid <- combHeights(x, distanceErythroid[,2])[[1]]
+yHSC <- combHeights(x, distanceHSC[,2])[[1]]
+yECFC <- combHeights(x,distancesECFC[,2])[[1]]
 
-## Generate the emperical PDF
-width<-300 # the width the fasta lines (must be uniform)
-m1PDF<-motifPDF(fasta,"CANNTG")[,2]
-m2PDF<-motifPDF(fasta,"GATAA")[,2]
-
-## Find the expected probability for each distance
-## Requires all peaks to be the same width
-mp<-eMP(m1PDF,m2PDF,width)
-
-## r is the range of the resulting mp, note that its length should 
-## be one less than twice the width
-r<-seq(-width+1,width-1)
-hs<-combHeights(r,distances[,2])[[1]]
-n<-length(distances[,2]) # total number of occurrences
-
-## Apply the bionomial test to the expected probability and
-## number of peaks seen
-pvalue<-mapply(function(a,b)btest(a,n,b),hs,mp)
-
-par(mfrow=c(2,1))
-plot(r,pvalue)
-plot(r,hs)
-
+plot(x, yLeukemia, 
+     main = "CANNTG-GATAA", 
+     xlab = "distance(bp)", ylab = "Frequency", 
+     type = "l")
+plot(x, yErythroid, 
+     main = "CANNTG-GATAA", 
+     xlab = "distance(bp)", ylab = "Frequency", 
+     type = "l")
+plot(x, yHSC, 
+     main = "CANNTG-GATAA", 
+     xlab = "distance(bp)", ylab = "Frequency", 
+     type = "l")
+plot(x,yECFC,
+     main="CANNTG-GATAA",
+     xlab="distance(bp)", ylab="Frequency",
+     type="l")
 ```
 
 
-Analysis of multiple motifs under peaks that have been previously identified. This example requires `BSgenome.Hsapiens.UCSC.hg19`, which can be installed using `biocLite`.
-```R
-## libraries
-library(mT1)
-library(Biostrings) # needed to get fasta data from genomic co-ords
-library(BSgenome.Hsapiens.UCSC.hg19) # genome
-
-## load a set of Jaspar motifs as strings
-jaspar<-mT1_jaspar
-
-## Example set of peaks
-peaks<-mT1_peaks
-
-## Transform genomic co-ords into neucleotides
-genome<-BSgenome.Hsapiens.UCSC.hg19
-fasta<-getSeq(genome,peaks$chr,start=peaks$start,end=peaks$end)
-
-## Motifs to compare
-motifs<-c("CANNTG","GATAA",jaspar$jsublM[1:8])
-
-## Find the preferred distances between `motifs` under the peaks
-objMT1<-mT1(fasta,motifs)
-
-## plot based on string
-plot(objMT1,"CANNTG","GATAA")
-
-## Plot based on printed order
-print(objMT)
-plot(objMT1,i=1)
-
+Write the list of motifs (The list of motifs can be written based on personal interests)
+```{r}
+motifs<-c("CANNTG","GATAA", "MCWTNT", "HGATAA", "GGGGA", "TAAWNG", "TGCCC", "TGACA", "TTGGC", "GCCAA")
 ```
+
+
+Find preferred distaces among all motifs and identify composite motifs. Every motif is compared with all motifs inside the motifs list:
+```{r}
+objMT1_Leukemia <-mT1(fastaLeukemia,motifs)
+objMT1_Erythroid <- mT1(fastaErythroid, motifs)
+objMT1_HSC <- mT1(fastaHSC, motifs)
+objMT1_ECFC<-mT1(fastaECFC,motifs)
+```
+
+Plots all motif-motif distance relationship graphs based on the string:
+```{r}
+plot(objMT1_Leukemia, "CANNTG", "GATAA")
+plot(objMT1_Erythroid, "CANNTG", "GATAA")
+plot(objMT1_HSC, "CANNTG", "GATAA")
+plot(objMT1_ECFC,"CANNTG","GATAA")
+```
+
+
+
