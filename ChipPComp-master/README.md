@@ -1,9 +1,10 @@
 # ChipPComp
 
-## Example
-Refer to alexjgriffith github: https://github.com/alexjgriffith/ChipPComp.
+## Refer to alexjgriffith github: https://github.com/alexjgriffith/ChipPComp.
 
 These examples use the data sets that will be in ChipPCompData, change the root directory to wherever you have this package saved.
+
+## Installation
 
 Install devtools and ChipPComp from github. ChipPComp package is used to define specifc PCA peak regions for each celluar environment:
 ```{r}
@@ -19,7 +20,7 @@ Install devtools and ChipPComp from github. ChipPComp package is used to define 
 >library(Biostrings)
 ```
 
-
+## Example
 
 List the work directory as root and list all bed files, peak files and categories for all 15 cell lines (Notice: all file names inside peaklist, rawData and categories should corresponding to others and keep in the same files order):
 ```{r
