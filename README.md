@@ -24,7 +24,7 @@ Source the devtools package in R every time before use functions inside devtools
 ```{r}
 >library(devtools)
 ```
-Install the Leukemia_Tal1 package into R with the help of the function inside devtools:
+Install the LeukemiaTal1 package into R with the help of the function inside devtools:
 ```{r}
 >install_github(“JiaxuanBoogie1/LeukemiaTal1”)
 >library(LeukemiaTal1)
@@ -85,7 +85,7 @@ mT1:	Investigation of novel preferred distance between a list of motifs. The inp
 
 
 ## makeCCCA:
-This is the main function inside Leukemia_Tal1. This function contains sub functions makeAFS (find the alternative feature space), makeUDM (unified all AFS to make unified density matrix), and makePRC (find the principal component analysis) 
+This is the main function inside LeukemiaTal1. This function contains sub functions makeAFS (find the alternative feature space), makeUDM (unified all AFS to make unified density matrix), and makePRC (find the principal component analysis) 
 
 Option: 
 -r -- rawData
