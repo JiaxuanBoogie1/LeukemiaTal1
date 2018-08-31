@@ -1,4 +1,4 @@
-# Leukemia_Tal1
+# LeukemiaTal1
 The combination of ChipPComp and mT1 from alexjgriffith Github
 
 ## Refer to alexjgriffith ChipPComp: https://github.com/alexjgriffith/ChipPComp
@@ -14,7 +14,7 @@ mT1 part is run after the bed files and fasta files about defined peak regions f
 
 ## Installation:
 Prerequisites:
-R (>= 3.4.0) to run Leukemia_Tal1
+R (>= 3.4.0) to run LeukemiaTal1
 
 Install from source:
 Install devtools at first which contains the command to directly install package from github. To install devtools:
@@ -26,8 +26,8 @@ Source the devtools package in R every time before use functions inside devtools
 ```
 Install the Leukemia_Tal1 package into R with the help of the function inside devtools:
 ```{r}
->install_github(“JiaxuanBoogie1/Leukemia_Tal1”)
->library(Leukemia_Tal1)
+>install_github(“JiaxuanBoogie1/LeukemiaTal1”)
+>library(LeukemiaTal1)
 ```
 
 Install other required packages:
@@ -55,7 +55,7 @@ To use GenomicRanges, source it every time before use it:
 >library(GenomicRanges)
 ```
 
-## Usage of Leukemia_Tal1:
+## Usage of LeukemiaTal1:
 Example for forming the ccca data frame:
 >makeCCCA (-r unique_nodups.bed, -p peaks.xls, -c, -mco)
 
