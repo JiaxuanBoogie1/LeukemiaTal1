@@ -1,12 +1,11 @@
-Package: ChipPComp
+Package: Leukemia_Tal1
 Title: What the Package Does (one line, title case)
 Version: 0.99.0
-Author: Alexander Griffith [aut, cre],
-Maintainer: Alexander Griffith <griffitaj@gmail.com>
-Description: Combines ChIP seq data between species, and applies
-             principal component analysis to elucidate underlying
-             similarities between data sets.
-Depends: R (>= 3.5.0)
+Author: Jiaxuan Wang [aut, cre],
+Maintainer: Jiaxuan Wang <jwang375@uottawa.ca>
+Description: The combination of ChipPComp and mT1 to separate peaks for Tal1 transcription factor in leukemia, erythroid, HSC, and ECFC. 
+             Use redefined peaks to find preferred distances between composite motifs. 
+Depends: R (>= 3.4.0)
 License: What license is it under?
 VignetteBuilder: knitr
 Encoding: UTF-8
