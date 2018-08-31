@@ -1,12 +1,12 @@
 Package: Leukemia_Tal1
 Title: Compare Tal1 motif binding sites
 Version: 0.99.0
-Author: Jiaxuan Wang [aut, cre],
+Author:  Alexander Griffith [aut, cre],
 Maintainer: Jiaxuan Wang <jwang375@uottawa.ca>
 Description: The combination of ChipPComp and mT1 to separate peaks for Tal1 transcription factor in leukemia, erythroid, HSC, and ECFC. 
              Use redefined peaks to find preferred distances between composite motifs. 
 Depends: R (>= 3.4.0)
-License: GPL
+License: GPL (>= 2)
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
